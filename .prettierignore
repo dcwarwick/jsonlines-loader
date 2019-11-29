@@ -1,0 +1,6 @@
+/coverage
+/dist
+/node_modules
+/test/*.json
+/test/*.jsonl
+CHANGELOG.md
