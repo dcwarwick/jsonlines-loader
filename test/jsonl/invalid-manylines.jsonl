@@ -1,0 +1,19 @@
+
+{}
+{
+}
+{ "foo": 42, "bar": ["fish", 7, null], "reasons-to-be-cheerful": [1, 2, 3]
+"foo": 42, "bar": ["fish", 7, null], "reasons-to-be-cheerful": [1, 2, 3] }
+[ 9, 8, 7, "banana, true, false ]
+" "
+3.1 4 1 5 9 2 6
+truthy
+false,false
+
+null
+nurl
+[
+]
+
+'penultimate'
+"ultimate"

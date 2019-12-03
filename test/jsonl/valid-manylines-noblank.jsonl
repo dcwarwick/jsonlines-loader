@@ -1,0 +1,10 @@
+{}
+{ "foo": 42, "bar": ["fish", 7, null], "reasons-to-be-cheerful": [1, 2, 3] }
+[ 9, 8, 7, "banana", true, false ]
+"Tick tock...tick tock...\nLife is counting down on your internal clock."
+3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
+true
+false
+[true,true,true,true,true,null,false]
+null
+[]
