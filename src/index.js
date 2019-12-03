@@ -3,26 +3,37 @@
   Author Dave Clark @dcwarwick
 */
 
+import { getOptions } from "loader-utils";
+
 export default function loader(source) {
-  const entry = (line, number) => {
-    let parsed;
-    // parse each line to ensure it contains valid JSON
+  const options = getOptions(this);
+
+  const processLine = line => {
     try {
-      parsed = JSON.parse(line);
+      // parse each line and stringify it, to ensure valid JSON
+      const parsed = JSON.parse(line);
+      return JSON.stringify(parsed);
     } catch (err) {
+      if (options && options.ignoreParseErrors) {
+        // if there was a parse error and we're ignoring them
+        // just copy the source line in as a string
+        return `"${line.replace(/"/g, '\\"')}"`;
+      }
+      // otherwise report parse errors to WebPack
       this.emitError(err);
+      return "";
     }
-    // create an object field entry keyed by the line number
-    return `${number}:${JSON.stringify(parsed)}`;
   };
 
-  return `module.exports = {${source
+  const result = `module.exports = [,${source
     // split the source into 'lines' delimited by newline
     .split("\n")
     // if the last line is empty we discard it
-    .filter((line, index, array) => index < array.length - 1 || /\S/.test(line))
-    // convert each line into an object field entry, indexing from 1
-    .map((line, index) => entry(line, index + 1))
-    // combine the output into an object literal that we export
-    .join(",")}}`;
+    .filter((line, index, lines) => index < lines.length - 1 || /\S/.test(line))
+    // convert each line into a javascript literal
+    .map(line => processLine(line))
+    // concatenate the literals into an array literal (with empty zeroth element)
+    .join(",")}]`;
+
+  return result;
 }
