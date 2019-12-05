@@ -4,9 +4,21 @@
 */
 
 import { getOptions } from "loader-utils";
+import validateOptions from "schema-utils";
+
+const schema = {
+  type: "object",
+  properties: {
+    ignoreParseErrors: {
+      type: "boolean"
+    }
+  },
+  additionalProperties: false
+};
 
 export default function loader(source) {
-  const options = getOptions(this);
+  const options = getOptions(this) || {};
+  validateOptions(schema, options, "JSON Lines loader");
 
   const processLine = line => {
     try {
