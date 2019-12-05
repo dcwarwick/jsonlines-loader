@@ -1,7 +1,7 @@
 import loader from "../src";
 import cjsMain from "../src/cjs-main";
 
-import webpack from "./helpers/webpack-harness";
+import webpack from "./helpers/compiler";
 
 const load = async (testId, ignoreParseErrors) =>
   ignoreParseErrors
