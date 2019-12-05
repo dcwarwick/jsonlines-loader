@@ -1,6 +1,6 @@
 {
   "name": "jsonlines-loader",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "JSON lines (jsonl) loader module for webpack",
   "license": "MIT",
   "repository": "dcwarwick/jsonlines-loader",
