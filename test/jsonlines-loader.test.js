@@ -10,7 +10,9 @@ const load = async (testId, ignoreParseErrors) =>
 
 const checkFile = async (testId, ignoreParseErrors) => {
   const result = await load(testId, ignoreParseErrors);
-  expect(result.module ? result.module.source : "").toMatchSnapshot("content");
+  expect(
+    result.module && !result.module.failed ? result.module.source : ""
+  ).toMatchSnapshot("content");
   expect(result.warnings).toMatchSnapshot("warnings");
   expect(result.errors).toMatchSnapshot("errors");
 };
@@ -22,6 +24,15 @@ describe("the jsonlines loader", () => {
 
   it("exports as Common-JS", () => {
     expect(cjsMain).toEqual(loader);
+  });
+
+  it("rejects invalid options", async () => {
+    const result = await webpack("./jsonl/valid-nolines-noblank.jsonl", {
+      fictionalOption: 42
+    });
+    expect(result.module.failed).toEqual(true);
+    expect(result.warnings).toMatchSnapshot("warnings");
+    expect(result.errors).toMatchSnapshot("errors");
   });
 
   it("handles an empty file", async () =>
