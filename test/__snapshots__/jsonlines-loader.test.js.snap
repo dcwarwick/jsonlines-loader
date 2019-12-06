@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`the jsonlines loader rejects invalid options: warnings 1`] = `Array []`;
+exports[`the jsonlines loader rejects invalid options: errors 1`] = `
+Array [
+  [ModuleBuildError: Module build failed (replaced/path):
+ValidationError: Invalid configuration object. Object has been initialised using a configuration object that does not match the API schema.
+ - configuration has an unknown property 'fictionalOption'. These properties are valid:
+   object { ignoreParseErrors? }
+    at validate (/Users/dave/git/jsonlines-loader/node_modules/schema-utils/dist/validate.js:85:11)
+    at Object.loader (/Users/dave/git/jsonlines-loader/src/index.js:21:3)],
+]
+`;
+
 exports[`the jsonlines loader handles an empty file: content 1`] = `"module.exports = [,]"`;
 exports[`the jsonlines loader handles an empty file: warnings 1`] = `Array []`;
 exports[`the jsonlines loader handles an empty file: errors 1`] = `
