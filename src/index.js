@@ -37,7 +37,7 @@ export default function loader(source) {
     }
   };
 
-  const result = `module.exports = [,${source
+  const result = `module.exports = [${source
     // split the source into 'lines' delimited by newline
     .split("\n")
     // if the last line is empty we discard it
